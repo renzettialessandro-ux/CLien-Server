@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package eserciziosocketserver;
+
+// 1. Importa la classe dal pacchetto "eserciziosocket"
+import eserciziosocket.InvioMessaggi;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,28 +11,28 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- *
- * @author renzetti.alessandro
- */
 public class EsercizioSocketServer {
 
-    /**
-     * @param args the command line arguments
-     * @throws java.io.IOException
-     */
     public static void main(String[] args) throws IOException {
-        ServerSocket server= new ServerSocket(5555);
+        ServerSocket server = new ServerSocket(5555);
+
         try (Socket client = server.accept()) {
-            InputStream inputStream= client.getInputStream();
+            // Ricezione del messaggio dal client
+            InputStream inputStream = client.getInputStream();
             DataInputStream dataInputStream = new DataInputStream(inputStream);
             String clientMessage = dataInputStream.readUTF();
             System.out.println("Messaggio dal client: " + clientMessage);
+
+            // Istanza della classe InvioMessaggi
+            InvioMessaggi invio = new InvioMessaggi();
+
+            // 2. Chiamata al metodo con il nome corretto
+            String risposta = invio.chiediEMandaMessaggio();
+
+            // Invio della risposta letta da tastiera
             OutputStream outputStream = client.getOutputStream();
-            DataOutputStream dataOutputStream= new DataOutputStream(outputStream);
-            String risposta="Ciao Client";
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
             dataOutputStream.writeUTF(risposta);
         }
     }
-    
 }

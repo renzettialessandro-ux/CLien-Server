@@ -11,10 +11,9 @@ import java.util.Scanner;
  * @author renzetti.alessandro
  */
 public class InvioMessaggi {
-    public void chiediEMandaMessaggio() {
+    public String chiediEMandaMessaggio() {
         Scanner s = new Scanner(System.in);
         System.out.print("Cosa vuoi scrivere al client?: ");
-        String nome = s.nextLine();
-        
+        return s.nextLine();
     }
 }
